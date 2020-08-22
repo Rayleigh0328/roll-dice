@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Dice} from '../dice/dice.component';
+import "./roll-dice.styles.css";
 
 class RollDice extends Component{
 
@@ -33,28 +34,31 @@ class RollDice extends Component{
     this.setState({
       dices : this.generateRandomArray(this.props.numberOfDice),
       isRolling : true
-    },
-    () => setTimeout(
+    });
+    setTimeout(
       () => this.setState({isRolling : false}), 
       this.props.animationDuration
-    ));
+    );
   }
 
   render(){
     let buttonText = (this.state.isRolling ? "Rolling..." : "click to roll");
     let buttonClass = (this.state.isRolling? "RollDice-rolling":"RollDice-to-roll");
     return (
-      <div>
+      <div className="RollDice">
+        <div className="DiceContainer">
         {this.state.dices.map( (v,i) => 
           <Dice 
             key={i} 
             face={v} 
             animationDuration={this.props.animationDuration}
+            isRolling={this.state.isRolling}
           />
         )}
+        </div> 
         <button 
           onClick={this.roll} 
-          className = {buttonClass}
+          className = {`RollDice ${buttonClass}`}
           disabled = {this.state.isRolling}
         >
           {buttonText}

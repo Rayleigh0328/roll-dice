@@ -11,7 +11,7 @@ class Dice extends Component {
 
   render(){
     return (
-      <div><i className={`Dice fas fa-dice-${Dice.spellOut[this.props.face]}`}></i></div>
+      <div className={this.props.isRolling?"shaking":null}><i className={`Dice fas fa-dice-${Dice.spellOut[this.props.face]}`}></i></div>
     )
   }
 }
